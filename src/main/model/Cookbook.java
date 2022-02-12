@@ -25,12 +25,21 @@ public class Cookbook {
     // MODIFIES: this
     // EFFECTS: removes a recipe from the cookbook
     public void removeRecipe(Recipe recipe) {
-        recipes.remove(recipe);
+        for (int i = 0; i < recipes.size(); i++) {
+            Recipe r = recipes.get(i);
+            if (r.getRecipeTitle() == recipe.getRecipeTitle()) {
+                recipes.remove(recipe);
+            }
+        }
     }
 
-    // EFFECTS: return details of specified recipe
-    public Recipe getRecipe(int recipePos) {
-        return recipes.get(recipePos - 1);
+    public Recipe findRecipe(String recipeTBD) {
+        for (Recipe r : recipes) {
+            if (r.getRecipeTitle().equals(recipeTBD)) {
+                return r;
+            }
+        }
+        return null;
     }
 
     // method mostly here to help with testing

@@ -27,8 +27,7 @@ is helpful because it stores all possible recipes in a convenient list for the u
 - As a user, I want to be able to add a recipe to a Cookbook.
 - As a user, I want to be able to view all my recipes that are contained in my cookbook. 
 - As a user, I want to create my own recipe with a name, ingredients, and instructions.
-- As a user, I want to access and read an individual recipe in detail (what ingredients are required, 
-what the instructions are).
+- As a user, I want to be able to delete a recipe that was added to the Cookbook.
 
 
 ###References/Process

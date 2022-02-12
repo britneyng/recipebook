@@ -45,10 +45,4 @@ public class CookbookTest {
         assertEquals(0, testCookbook.length());
     }
 
-    @Test
-    void getRecipeTest() {
-        testCookbook.addRecipe(testRecipe);
-        assertEquals(testRecipe, testCookbook.getRecipe(1));
-    }
-
 }

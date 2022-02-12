@@ -123,6 +123,8 @@ public class CookbookApp {
     public void removeRecipe() {
         System.out.println("Which recipe would you like to remove? Enter the name: ");
         listRecipes();
+        String recipeToBeRemoved = input.next();
+        cookbook.removeRecipe(cookbook.findRecipe(recipeToBeRemoved));
 
 
     }
