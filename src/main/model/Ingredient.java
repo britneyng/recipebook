@@ -16,17 +16,14 @@ public class Ingredient {
 
     }
 
-    // EFFECTS: return the name of the ingredient
     public String getIngredientName() {
         return name;
     }
 
-    // EFFECTS: return the amount of the ingredient
     public double getIngredientAmount() {
         return amount;
     }
 
-    // EFFECTS: return the unit of the ingredient
     public String getIngredientUnit() {
         return unit;
     }

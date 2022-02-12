@@ -54,8 +54,8 @@ public class StepListTest {
        testList.addStep(stepA);
        testList.addStep(stepB);
        testList.addStep(stepC);
-       assertEquals(stepA, testList.displayStep(1));
-       assertEquals(stepB, testList.displayStep(2));
-       assertEquals(stepC, testList.displayStep(3));
+       assertEquals(stepA, testList.getStep(1));
+       assertEquals(stepB, testList.getStep(2));
+       assertEquals(stepC, testList.getStep(3));
    }
 }

@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RecipeTest {
+public class CookbookTest {
 
+    private Cookbook testCookbook;
     private Recipe testRecipe;
     private IngredientList testIngredientList;
     private Ingredient testIngredient;
@@ -17,6 +18,7 @@ public class RecipeTest {
 
     @BeforeEach
     void runBefore() {
+        testCookbook = new Cookbook();
         testIngredientList = new IngredientList();
         testIngredient = new Ingredient("Egg", 1, "whole");
         testStepA = new Step(1, "Add oil to pan");
@@ -26,22 +28,27 @@ public class RecipeTest {
         testStepList.addStep(testStepA);
         testStepList.addStep(testStepB);
         testRecipe = new Recipe("Fried Egg", testIngredientList, testStepList);
+
     }
 
     @Test
-    void getRecipeTitleTest(){
-        assertEquals("Fried Egg", testRecipe.getRecipeTitle());
+    void addRecipe() {
+        testCookbook.addRecipe(testRecipe);
+        assertEquals(1, testCookbook.length());
     }
 
     @Test
-    void getRecipeIngredientsTest() {
-        assertEquals(" 1. Egg, 1.0 whole" ,testRecipe.getIngredients());
+    void removeRecipe() {
+        testCookbook.addRecipe(testRecipe);
+        assertEquals(1, testCookbook.length());
+        testCookbook.removeRecipe(testRecipe);
+        assertEquals(0, testCookbook.length());
     }
 
     @Test
-    void getCurrentStepTest() {
-        assertEquals(testStepA, testRecipe.getCurrentStep(1));
-        assertEquals(testStepB, testRecipe.getCurrentStep(2));
+    void getRecipeTest() {
+        testCookbook.addRecipe(testRecipe);
+        assertEquals(testRecipe, testCookbook.getRecipe(1));
     }
+
 }
-

@@ -15,9 +15,25 @@ also help with planning meals as the application will also be able to
 suggest recipes with ingredients on hand.
 
 
+### Why a Recipe Manager?
+
+I chose to create a Recipe Manager because cooking is a hobby of mine that I enjoy.
+However, I often ran into the problem of not knowing what to cook
+or what recipes I could make with ingredients I had on hand. The recipe manager
+is helpful because it stores all possible recipes in a convenient list for the user.
+
 ## User Stories
 
-- As a user, I want to be able to add a recipe to a Cookbook by inputting the name, ingredients, and instructions. 
+- As a user, I want to be able to add a recipe to a Cookbook.
 - As a user, I want to be able to view all my recipes that are contained in my cookbook. 
-- As a user, I want to be able to view suggested recipes with given ingredients on hand.
-- As a user, I want to access and view individual recipe in detail.
+- As a user, I want to create my own recipe with a name, ingredients, and instructions.
+- As a user, I want to access and read an individual recipe in detail (what ingredients are required, 
+what the instructions are).
+
+
+###References/Process
+ 
+Initially, my classes were structured such that Recipe took in Lists of 
+Strings to handle the ingredient/instruction component. I later made the design
+decision to reference the package structure from the FitLifeGym starter file to give the
+recipe components their own classes.

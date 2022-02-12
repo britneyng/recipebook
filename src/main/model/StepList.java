@@ -8,10 +8,10 @@ public class StepList {
 
     // EFFECTS: initialize stepList with an empty ArrayList
     public StepList() {
-        stepList = new ArrayList<Step>();
+        this.stepList = new ArrayList<Step>();
     }
 
-    // REQUIRES: steps should be added in sequentially starting at 1
+    // REQUIRES: steps should be added in sequentially; step cannot be 0
     // MODIFIES: this
     // EFFECTS: add a step to the list
     public void addStep(Step step) {
@@ -25,13 +25,16 @@ public class StepList {
         for (int i = 0; i < stepList.size(); i++) {
             if (stepList.get(i) == step) {
                 stepList.remove(step);
+                // look through the entire StepList and if a list matches a given step, remove it
             }
         }
     }
 
+    // REQUIRES: num must not be 0
     // EFFECTS: return the step with given number
-    public Step displayStep(int num) {
-        return stepList.get(num - 1);
+    public Step getStep(int stepNum) {
+        return stepList.get(stepNum - 1);
+        // items are stored with 0 based indexing, so subtract 1 to retrieve the correct step
 
     }
 
