@@ -51,6 +51,13 @@ public class CookbookTest {
         assertEquals(1, testCookbook.length());
         testCookbook.removeRecipe(testRecipeA);
         assertEquals(0, testCookbook.length());
+        Recipe tester = new Recipe("tester", testIngredientList, testStepList);
+        testCookbook.addRecipe(tester);
+        assertEquals(1, testCookbook.length());
+        testCookbook.removeRecipe(testRecipeA);
+        assertEquals(1, testCookbook.length());
+
+
     }
 
     @Test
@@ -61,6 +68,7 @@ public class CookbookTest {
         assertEquals(3, testCookbook.length());
         assertEquals(testRecipeB, testCookbook.findRecipe("Fried Egg Version 2"));
         assertEquals(testRecipeC, testCookbook.findRecipe("Fried Egg Version 3"));
+        assertEquals(null, testCookbook.findRecipe("Non-existent recipe"));
 
     }
 
