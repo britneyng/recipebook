@@ -16,6 +16,8 @@ public class Ingredient {
 
     }
 
+    // getters
+
     public String getIngredientName() {
         return name;
     }

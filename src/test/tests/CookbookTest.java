@@ -4,12 +4,18 @@ import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CookbookTest {
 
     private Cookbook testCookbook;
-    private Recipe testRecipe;
+    private Recipe testRecipeA;
+    private Recipe testRecipeB;
+    private Recipe testRecipeC;
+
     private IngredientList testIngredientList;
     private Ingredient testIngredient;
     private Step testStepA;
@@ -27,22 +33,42 @@ public class CookbookTest {
         testIngredientList.addIngredient(testIngredient);
         testStepList.addStep(testStepA);
         testStepList.addStep(testStepB);
-        testRecipe = new Recipe("Fried Egg", testIngredientList, testStepList);
+        testRecipeA = new Recipe("Fried Egg", testIngredientList, testStepList);
+        testRecipeB = new Recipe("Fried Egg Version 2", testIngredientList, testStepList);
+        testRecipeC = new Recipe("Fried Egg Version 3", testIngredientList, testStepList);
 
     }
 
     @Test
     void addRecipe() {
-        testCookbook.addRecipe(testRecipe);
+        testCookbook.addRecipe(testRecipeA);
         assertEquals(1, testCookbook.length());
     }
 
     @Test
     void removeRecipe() {
-        testCookbook.addRecipe(testRecipe);
+        testCookbook.addRecipe(testRecipeA);
         assertEquals(1, testCookbook.length());
-        testCookbook.removeRecipe(testRecipe);
+        testCookbook.removeRecipe(testRecipeA);
         assertEquals(0, testCookbook.length());
     }
 
+    @Test
+    void findRecipe() {
+        testCookbook.addRecipe(testRecipeA);
+        testCookbook.addRecipe(testRecipeB);
+        testCookbook.addRecipe(testRecipeC);
+        assertEquals(3, testCookbook.length());
+        assertEquals(testRecipeB, testCookbook.findRecipe("Fried Egg Version 2"));
+        assertEquals(testRecipeC, testCookbook.findRecipe("Fried Egg Version 3"));
+
+    }
+
+    @Test
+    void getRecipeList() {
+        testCookbook.addRecipe(testRecipeA);
+        testCookbook.addRecipe(testRecipeB);
+        testCookbook.addRecipe(testRecipeC);
+        assertEquals(3, testCookbook.getRecipeList().size());
+    }
 }

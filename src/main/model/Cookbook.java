@@ -1,6 +1,5 @@
 package model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Represents a cookbook with name and recipes
@@ -33,23 +32,26 @@ public class Cookbook {
         }
     }
 
-    public Recipe findRecipe(String recipeTBD) {
+    // REQUIRES: Cookbook must contain at least one recipe
+    // EFFECTS: goes through a list of recipes and returns it if found
+    public Recipe findRecipe(String recipe) {
         for (Recipe r : recipes) {
-            if (r.getRecipeTitle().equals(recipeTBD)) {
+            if (r.getRecipeTitle().equals(recipe)) {
                 return r;
             }
         }
         return null;
     }
 
-    // method mostly here to help with testing
+    // EFFECTS: returns a list of recipes that have been added to the cookbook
+    public ArrayList<Recipe> getRecipeList() {
+        return recipes;
+    }
+
+    // method for testing
     // EFFECTS: return size of cookbook
     public int length() {
         return recipes.size();
-    }
-
-    public ArrayList<Recipe> getRecipes() {
-        return recipes;
     }
 
 }

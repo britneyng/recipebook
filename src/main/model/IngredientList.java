@@ -17,7 +17,6 @@ public class IngredientList {
     // EFFECTS: adds an ingredient to the end of the cumulative list of ingredients
     public void addIngredient(Ingredient ingredient) {
         ingredientList.add(ingredient);
-
     }
 
     // REQUIRES: ingredient to be removed must already be in the list
@@ -30,15 +29,17 @@ public class IngredientList {
     // REQUIRES: ingredientList must have at least one ingredient in it
     // EFFECTS: returns the list of ingredients in the form of a string
     public String getIngredientList() {
+
         String recipeIngredients = "";
 
         for (int i = 0; i <= (ingredientList.size() - 1); i++) {
             int num = (i + 1);
             recipeIngredients = recipeIngredients.concat(" " + num + "." + " "  + ingredientList.get(i).name + ","
-                   + " " + ingredientList.get(i).amount + " " + ingredientList.get(i).unit);
+                    + " " + ingredientList.get(i).amount + " " + ingredientList.get(i).unit);
         } // find a better way to concatenate the string/setup step
         return recipeIngredients;
     }
+
 
     // primarily used as a tester method, may use later for recipe suggestions
     // EFFECTS: returns true if the ingredientList contains a given ingredient, false otherwise

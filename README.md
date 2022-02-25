@@ -36,3 +36,4 @@ Initially, my classes were structured such that Recipe took in Lists of
 Strings to handle the ingredient/instruction component. I later made the design
 decision to reference the package structure from the FitLifeGym starter file to give the
 recipe components their own classes.
+

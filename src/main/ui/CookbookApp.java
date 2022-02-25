@@ -70,6 +70,7 @@ public class CookbookApp {
         System.out.println("\tq -> quit");
     }
 
+    // EFFECTS: Creates a recipe with a name, ingredient list, and step list
     private void createRecipe() {
         System.out.println("Name your recipe:");
         String recipeName = input.next();
@@ -83,6 +84,7 @@ public class CookbookApp {
 
     }
 
+    // EFFECTS: creates an ingredient list for the recipe
     private void createIngredientList(IngredientList ingredientList) {
         System.out.println("Let's add some ingredients!");
         System.out.println("How many ingredients are in this recipe?");
@@ -104,6 +106,7 @@ public class CookbookApp {
         }
     }
 
+    // EFFECTS: creates a step list for the recipe
     public void writeStepList(StepList stepList) {
         System.out.println("Let's add some steps for your recipe!");
         System.out.println("How many steps are in this recipe?");
@@ -120,6 +123,7 @@ public class CookbookApp {
         }
     }
 
+    // EFFECTS: removes recipe from Cookbook if input matches an existing recipe name
     public void removeRecipe() {
         System.out.println("Which recipe would you like to remove? Enter the name: ");
         listRecipes();
@@ -129,17 +133,15 @@ public class CookbookApp {
 
     }
 
-
-
+    // EFFECTS: lists recipes to be viewed by the user
     public void viewRecipes() {
         listRecipes();
 
     }
 
-
     // EFFECTS: return a list of added recipes in the Cookbook
     public void listRecipes() {
-        for (Recipe r : cookbook.getRecipes()) {
+        for (Recipe r : cookbook.getRecipeList()) {
             System.out.println(recipe.getRecipeTitle());
         }
 

@@ -14,17 +14,16 @@ public class Recipe {
         this.steps = steps;
     }
 
-    // EFFECTS: returns the title of the recipe
+    // getters
+
     public String getRecipeTitle() {
         return recipeTitle;
     }
 
-    // EFFECTS: returns the ingredients in the list of required ingredients for the recipe
     public String getIngredients() {
         return ingredients.getIngredientList();
     }
 
-    // EFFECTS: return the instructions for the current step
     public Step getCurrentStep(int num) {
         return steps.getStep(num);
     }

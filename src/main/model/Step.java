@@ -14,12 +14,11 @@ public class Step {
         this.instructions = instructions;
     }
 
-    // EFFECTS: return the number of the step
+    // getters
     public int getStepNumber() {
         return stepNumber;
     }
 
-    // EFFECTS: return the instructions for a step
     public String getInstructions() {
         return instructions;
     }
