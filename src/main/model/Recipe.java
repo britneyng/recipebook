@@ -1,13 +1,16 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
 
 // Represents a recipe composed of a title, IngredientList, and StepList
-public class Recipe {
+
+public class Recipe implements Writable {
     private String recipeTitle;
     private IngredientList ingredients;
     private StepList steps;
 
-    // EFFECTS: initializes recipe with a name, a time in minutes, and steps
+    // EFFECTS: initializes recipe with a name, ingredients and steps
     public Recipe(String recipeTitle, IngredientList ingredients, StepList steps) {
         this.recipeTitle = recipeTitle;
         this.ingredients = ingredients;
@@ -21,10 +24,30 @@ public class Recipe {
     }
 
     public String getIngredients() {
-        return ingredients.getIngredientList();
+        if (ingredients != null) {
+            return ingredients.getIngredientList();
+        }
+        return null;
     }
 
-    public Step getCurrentStep(int num) {
-        return steps.getStep(num);
+    public String getSteps() {
+        if (steps != null) {
+            return steps.getSteps();
+        }
+        return null;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", recipeTitle);
+        if (ingredients != null) {
+            json.put("ingredients", ingredients.toJson());
+        }
+        if (steps != null) {
+            json.put("steps", steps.toJson());
+        }
+        // originally was json.put("ingredient list", ingredient list")
+        return json;
     }
 }

@@ -2,7 +2,10 @@ package model;
 
 // Represents a single step in the list of steps required for a recipe
 
-public class Step {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Step implements Writable {
 
     private int stepNumber;
     private String instructions;
@@ -15,11 +18,20 @@ public class Step {
     }
 
     // getters
+
     public int getStepNumber() {
         return stepNumber;
     }
 
     public String getInstructions() {
         return instructions;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("step number", stepNumber);
+        json.put("instructions", instructions);
+        return json;
     }
 }

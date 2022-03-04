@@ -62,7 +62,8 @@ public class IngredientListTest {
     void getIngredientListTest() {
         testList.addIngredient(ingredientA);
         testList.addIngredient(ingredientB);
-        assertEquals(" 1. Chicken broth, 0.5 cups 2. Chili sauce, 1.0 tbsp", testList.getIngredientList());
+        assertEquals("Chicken broth, 0.5 cups\n" +
+                "Chili sauce, 1.0 tbsp" + "\n", testList.getIngredientList());
     }
 
 

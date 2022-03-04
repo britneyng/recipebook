@@ -1,10 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 // Represents a cookbook with name and recipes
 
-public class Cookbook {
+public class Cookbook implements Writable {
+
     private ArrayList<Recipe> recipes;
 
     // REQUIRES: string must not be empty string, only one Cookbook can exist at a time
@@ -43,6 +48,19 @@ public class Cookbook {
         return null;
     }
 
+    public String getRecipe(String recipe) {
+        String recipeToPrint = "";
+        for (Recipe r : recipes) {
+            if (r.getRecipeTitle().equals(recipe)) {
+                recipeToPrint += r.getRecipeTitle();
+                recipeToPrint += r.getIngredients();
+                recipeToPrint += r.getSteps();
+                return recipeToPrint;
+            }
+        }
+        return null;
+    }
+
     // EFFECTS: returns a list of recipes that have been added to the cookbook
     public ArrayList<Recipe> getRecipeList() {
         return recipes;
@@ -54,4 +72,23 @@ public class Cookbook {
         return recipes.size();
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("recipes", recipesToJSON());
+        return json;
+    }
+
+    // EFFECTS: returns things in this cookbook as a JSON array
+    private JSONArray recipesToJSON() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Recipe r : recipes) {
+            jsonArray.put(r.toJson());
+        }
+
+        return jsonArray;
+    }
 }
+
+

@@ -35,13 +35,12 @@ public class RecipeTest {
 
     @Test
     void getRecipeIngredientsTest() {
-        assertEquals(" 1. Egg, 1.0 whole" ,testRecipe.getIngredients());
+        assertEquals("Egg, 1.0 whole" + "\n" ,testRecipe.getIngredients());
     }
 
     @Test
     void getCurrentStepTest() {
-        assertEquals(testStepA, testRecipe.getCurrentStep(1));
-        assertEquals(testStepB, testRecipe.getCurrentStep(2));
+        assertEquals("Add oil to pan" + "\n" + "Crack egg" + "\n", testRecipe.getSteps());
     }
 }
 

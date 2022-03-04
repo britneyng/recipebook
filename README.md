@@ -1,4 +1,4 @@
-# Recipe Manager
+# Recipe Buddy App 
 
 ### What will this application do?
 
@@ -25,12 +25,14 @@ is helpful because it stores all possible recipes in a convenient list for the u
 ## User Stories
 
 - As a user, I want to be able to add a recipe to a Cookbook.
-- As a user, I want to be able to view all my recipes that are contained in my cookbook. 
+- As a user, I want to be able to view a list of all  recipes that are contained in my cookbook. 
 - As a user, I want to create my own recipe with a name, ingredients, and instructions.
 - As a user, I want to be able to delete a recipe that was added to the Cookbook.
+- As a user, I want to be able to save my added recipes to file before quitting the program.
+- As a user, I want to be able to load and view a list of previously saved recipes.
 
 
-###References/Process
+### References/Process
  
 Initially, my classes were structured such that Recipe took in Lists of 
 Strings to handle the ingredient/instruction component. I later made the design

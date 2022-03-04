@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
-public class StepList {
+public class StepList implements Writable {
 
     private ArrayList<Step> stepList;
 
@@ -20,24 +24,29 @@ public class StepList {
 
     // REQUIRES: step must already exist in the list
     // MODIFIES: this
-    // EFFECTS: remove a specific step from the list
+    // EFFECTS: remove a step from existing StepList
     public void removeStep(Step step) {
         for (int i = 0; i < stepList.size(); i++) {
             if (stepList.get(i) == step) {
                 stepList.remove(step);
-                // look through the entire StepList and if a list matches a given step, remove it
             }
         }
     }
 
-    // REQUIRES: num must not be 0
-    // EFFECTS: return the step with given number
-    public Step getStep(int stepNum) {
-        return stepList.get(stepNum - 1);
-        // items are stored with 0 based indexing, so subtract 1 to retrieve the correct step
+    // EFFECTS: return a list of the steps for a recipe
+    public String getSteps() {
+        String result  = "";
+        String step = "";
 
+        for (Step s : stepList) {
+            step = s.getInstructions();
+            step += "\n";
+            result += step;
+        }
+        return result;
     }
 
+    // use this to handle exception from removeStep later!
     // EFFECTS: return true is StepList contains specified step and false otherwise
     public Boolean hasStep(Step step) {
         if (stepList.contains(step)) {
@@ -46,4 +55,21 @@ public class StepList {
         return false;
     }
 
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray stepListToJSON() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Step s : stepList) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("step list", stepListToJSON());
+        return json;
+    }
 }

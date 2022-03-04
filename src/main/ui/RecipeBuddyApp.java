@@ -1,35 +1,52 @@
 package ui;
 
 import model.*;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Code referenced from TellerApp
-public class CookbookApp {
+// Repo:
 
+
+// Referenced code from JsonSerializationDemo
+// Repo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+
+
+public class RecipeBuddyApp {
+
+    private static final String JSON_STORE = "./data/cookbook.json";
     private Scanner input;
     private Cookbook cookbook = new Cookbook();
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
+
+    // refactor code later so that these fields are not used
     private IngredientList ingredientList;
     private StepList stepList;
     private Ingredient ingredient;
     private Step step;
 
     // EFFECTS: runs the Cookbook app
-    public CookbookApp() {
-        runCookbook();
-
+    public RecipeBuddyApp() {
+        runRecipeBuddyApp();
     }
 
-    public void runCookbook() {
+    public void runRecipeBuddyApp() {
         Boolean keepGoing = true;
         String command = null;
 
         System.out.println(
                 "Welcome! This is a cookbook app that is designed to help you manage your recipes."
-                        + "Try adding one!");
+                        + " Try adding one!");
 
         input = new Scanner(System.in);
         input.useDelimiter("\n");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
 
         while (keepGoing) {
             displayMenu();
@@ -49,12 +66,18 @@ public class CookbookApp {
     // MODIFIES: this
     // EFFECTS: processes user command
     private void processCommand(String command) {
-        if (command.equals("v")) {
+        if (command.equals("view")) {
             viewAllRecipes();
-        } else if (command.equals("w")) {
+        } else if (command.equals("read")) {
+            viewSingleRecipe();
+        } else if (command.equals("write")) {
             createRecipe();
-        } else if (command.equals("r")) {
+        } else if (command.equals("remove")) {
             removeRecipe();
+        } else if (command.equals("save")) {
+            saveCookbook();
+        } else if (command.equals("load")) {
+            loadCookbook();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -63,9 +86,12 @@ public class CookbookApp {
     // EFFECTS: displays menu of options to user
     private void displayMenu() {
         System.out.println("\nSelect from:");
-        System.out.println("\tv -> view list of added recipes");
-        System.out.println("\tw -> write a recipe");
-        System.out.println("\tr -> remove recipe");
+        System.out.println("\tview -> view list of added recipes");
+        System.out.println("\tread -> read single recipe");
+        System.out.println("\twrite -> write a recipe");
+        System.out.println("\tremove -> remove recipe");
+        System.out.println("\tsave -> save recipes to file");
+        System.out.println("\tload -> load recipes from file");
         System.out.println("\tq -> quit");
     }
 
@@ -126,6 +152,16 @@ public class CookbookApp {
 
     }
 
+    // EFFECTS: view single recipe in detail
+    public void viewSingleRecipe() {
+        System.out.println("Which recipe would you like to access?");
+        listRecipes();
+        String recipeToView = input.next();
+        cookbook.findRecipe(recipeToView);
+        cookbook.getRecipe(recipeToView);
+
+    }
+
     // EFFECTS: removes recipe from Cookbook if input matches an existing recipe name
     public void removeRecipe() {
         System.out.println("Which recipe would you like to remove? Enter the name: ");
@@ -141,9 +177,30 @@ public class CookbookApp {
         }
     }
 
-    // EFFECTS: view a recipe in detail with a list of ingredients and stepse
-//    public void viewDetailedRecipe(){
-//
-//    }
+    // EFFECTS: saves the cookbook to file
+    private void saveCookbook() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(cookbook);
+            jsonWriter.close();
+            System.out.println("Saved to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads cookbook from file
+    private void loadCookbook() {
+        try {
+            cookbook = jsonReader.read();
+            System.out.println("Loaded cookbook from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }
+
+
 

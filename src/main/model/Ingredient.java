@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
+
 // Represents an ingredient that will be used in a recipe
-public class Ingredient {
+public class Ingredient implements Writable {
 
     protected String name;
     protected double amount;
@@ -28,5 +32,15 @@ public class Ingredient {
 
     public String getIngredientUnit() {
         return unit;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("ingredient name", name);
+        json.put("ingredient amount", amount);
+        json.put("ingredient unit", unit);
+        return json;
     }
 }

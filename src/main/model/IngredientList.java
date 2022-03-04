@@ -1,9 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 // Represents a list of the ingredients that are required for a recipe
-public class IngredientList {
+public class IngredientList implements Writable {
 
     private ArrayList<Ingredient> ingredientList;
 
@@ -29,15 +35,19 @@ public class IngredientList {
     // REQUIRES: ingredientList must have at least one ingredient in it
     // EFFECTS: returns the list of ingredients in the form of a string
     public String getIngredientList() {
+        String result  = "";
+        String ingredient = "";
 
-        String recipeIngredients = "";
-
-        for (int i = 0; i <= (ingredientList.size() - 1); i++) {
-            int num = (i + 1);
-            recipeIngredients = recipeIngredients.concat(" " + num + "." + " "  + ingredientList.get(i).name + ","
-                    + " " + ingredientList.get(i).amount + " " + ingredientList.get(i).unit);
-        } // find a better way to concatenate the string/setup step
-        return recipeIngredients;
+        for (Ingredient i : ingredientList) {
+            ingredient =  i.getIngredientName();
+            ingredient += ", ";
+            ingredient += i.getIngredientAmount();
+            ingredient += " ";
+            ingredient += i.getIngredientUnit();
+            ingredient += "\n";
+            result += ingredient;
+        }
+        return result;
     }
 
 
@@ -49,5 +59,25 @@ public class IngredientList {
         }
         return false;
     }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray ingredientListToJSON() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Ingredient i : ingredientList) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("ingredient list", ingredientListToJSON());
+        return json;
+    }
+
 
 }

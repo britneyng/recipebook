@@ -1,0 +1,12 @@
+{"recipes": [{
+    "name": "Fried egg",
+    "ingredients": {"ingredient list": [{
+        "ingredient amount": 1,
+        "ingredient unit": "Whole",
+        "ingredient name": "Egg"
+    }]},
+    "steps": {"step list": [{
+        "instructions": "Fry the egg",
+        "step number": 1
+    }]}
+}]}
