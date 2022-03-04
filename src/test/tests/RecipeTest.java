@@ -4,12 +4,14 @@ import model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RecipeTest {
 
     private Recipe testRecipe;
+//    private Recipe testRecipeB;
     private IngredientList testIngredientList;
+    private StepList emptyStepList;
     private Ingredient testIngredient;
     private Step testStepA;
     private Step testStepB;
@@ -22,10 +24,12 @@ public class RecipeTest {
         testStepA = new Step(1, "Add oil to pan");
         testStepB = new Step(2, "Crack egg");
         testStepList = new StepList();
+        emptyStepList = new StepList();
         testIngredientList.addIngredient(testIngredient);
         testStepList.addStep(testStepA);
         testStepList.addStep(testStepB);
         testRecipe = new Recipe("Fried Egg", testIngredientList, testStepList);
+//        testRecipeB = new Recipe("Empty", emptyIngredientList, emptyStepList);
     }
 
     @Test
@@ -35,6 +39,7 @@ public class RecipeTest {
 
     @Test
     void getRecipeIngredientsTest() {
+        assertFalse(testIngredientList == null);
         assertEquals("Egg, 1.0 whole" + "\n" ,testRecipe.getIngredients());
     }
 

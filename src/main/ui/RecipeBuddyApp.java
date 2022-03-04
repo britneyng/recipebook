@@ -150,9 +150,8 @@ public class RecipeBuddyApp {
         System.out.println("Which recipe would you like to access?");
         listRecipes();
         String recipeToView = input.next();
-        cookbook.findRecipe(recipeToView);
-        cookbook.printRecipe(recipeToView);
-
+        String toPrint = cookbook.printRecipe(recipeToView);
+        System.out.println(toPrint);
     }
 
     // EFFECTS: removes recipe from Cookbook if input matches an existing recipe name

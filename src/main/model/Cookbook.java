@@ -31,7 +31,7 @@ public class Cookbook implements Writable {
     public void removeRecipe(Recipe recipe) {
         for (int i = 0; i < recipes.size(); i++) {
             Recipe r = recipes.get(i);
-            if (r.getRecipeTitle() == recipe.getRecipeTitle()) {
+            if (r.getRecipeTitle().equals(recipe.getRecipeTitle())) {
                 recipes.remove(recipe);
             }
         }
@@ -55,7 +55,7 @@ public class Cookbook implements Writable {
         String result  = "";
 
         for (Recipe r : recipes) {
-            if (r.getRecipeTitle() == (recipe)) {
+            if (r.getRecipeTitle().equals(recipe)) {
                 recipeToPrint += r.getRecipeTitle();
                 recipeToPrint += "\n";
                 recipeToPrint += "Ingredients:" + "\n";
