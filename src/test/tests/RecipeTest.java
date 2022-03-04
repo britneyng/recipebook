@@ -29,7 +29,6 @@ public class RecipeTest {
         testStepList.addStep(testStepA);
         testStepList.addStep(testStepB);
         testRecipe = new Recipe("Fried Egg", testIngredientList, testStepList);
-//        testRecipeB = new Recipe("Empty", emptyIngredientList, emptyStepList);
     }
 
     @Test

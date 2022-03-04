@@ -63,8 +63,8 @@ public class Cookbook implements Writable {
                 recipeToPrint += "Steps:" + "\n";
                 recipeToPrint += r.getSteps();
                 result += recipeToPrint;
+                return result;
             }
-            return result;
         }
         return null;
     }

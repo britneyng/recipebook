@@ -80,8 +80,9 @@ public class CookbookTest {
 
     @Test
     void testPrintRecipe() {
+        testCookbook.addRecipe(testRecipeA);
         testCookbook.addRecipe(testRecipeB);
-        System.out.println(testCookbook.printRecipe("Fried Egg Version 2"));
+        assertEquals(null, testCookbook.printRecipe("Fried Egg Version 1"));
         assertEquals("Fried Egg Version 2"
                         + "\n"
                         + "Ingredients:"
@@ -96,4 +97,5 @@ public class CookbookTest {
                         + "\n"
                 , testCookbook.printRecipe("Fried Egg Version 2"));
     }
+
 }
