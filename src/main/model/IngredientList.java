@@ -4,9 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 // Represents a list of the ingredients that are required for a recipe
 public class IngredientList implements Writable {
@@ -61,7 +59,7 @@ public class IngredientList implements Writable {
     }
 
     // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray ingredientListToJSON() {
+    private JSONArray ingredientListToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Ingredient i : ingredientList) {
@@ -75,7 +73,7 @@ public class IngredientList implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("ingredient list", ingredientListToJSON());
+        json.put("ingredient list", ingredientListToJson());
         return json;
     }
 
