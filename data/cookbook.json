@@ -1,12 +1,18 @@
 {"recipes": [{
-    "name": "eggs",
+    "name": "spam",
     "ingredients": {"ingredient list": [{
         "ingredient amount": 1,
-        "ingredient unit": "whole",
-        "ingredient name": "egg"
+        "ingredient unit": "can",
+        "ingredient name": "spam"
     }]},
-    "steps": {"step list": [{
-        "instructions": "cook the egg in some fashion",
-        "step number": 1
-    }]}
+    "steps": {"step list": [
+        {
+            "instructions": "open the can",
+            "step number": 1
+        },
+        {
+            "instructions": "remove the spam",
+            "step number": 2
+        }
+    ]}
 }]}
