@@ -24,17 +24,11 @@ public class Recipe implements Writable {
     }
 
     public String getIngredients() {
-        if (ingredients != null) {
-            return ingredients.getIngredientList();
-        }
-        return null;
+        return ingredients.getIngredientList();
     }
 
     public String getSteps() {
-        if (steps != null) {
-            return steps.getSteps();
-        }
-        return null;
+        return steps.getSteps();
     }
 
     @Override

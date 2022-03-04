@@ -1,26 +1,12 @@
-{"recipes": [
-    {
-        "name": "Eggs V2",
-        "ingredients": {"ingredient list": [{
-            "ingredient amount": 1,
-            "ingredient unit": "whole",
-            "ingredient name": "Egg"
-        }]},
-        "steps": {"step list": [{
-            "instructions": "Boil egg",
-            "step number": 1
-        }]}
-    },
-    {
-        "name": "tomato",
-        "ingredients": {"ingredient list": [{
-            "ingredient amount": 1,
-            "ingredient unit": "whole",
-            "ingredient name": "tomato"
-        }]},
-        "steps": {"step list": [{
-            "instructions": "add tomato",
-            "step number": 1
-        }]}
-    }
-]}
+{"recipes": [{
+    "name": "eggs",
+    "ingredients": {"ingredient list": [{
+        "ingredient amount": 1,
+        "ingredient unit": "whole",
+        "ingredient name": "egg"
+    }]},
+    "steps": {"step list": [{
+        "instructions": "cook the egg in some fashion",
+        "step number": 1
+    }]}
+}]}
