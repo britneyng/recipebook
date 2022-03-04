@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RecipeTest {
 
     private Recipe testRecipe;
-//    private Recipe testRecipeB;
     private IngredientList testIngredientList;
     private StepList emptyStepList;
     private Ingredient testIngredient;
