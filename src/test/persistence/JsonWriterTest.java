@@ -52,14 +52,16 @@ public class JsonWriterTest extends JsonTest {
             StepList stepList = new StepList();
             stepList.addStep(stepA);
             c.addRecipe(new Recipe("Fried egg", ingList, stepList));
-//
-//            Ingredient bread = new Ingredient("Bread", 1, "Slice");
-//            IngredientList ingListB = new IngredientList();
-//            ingList.addIngredient(bread);
-//            Step stepB = new Step(1, "Toast the bread");
-//            StepList stepListB = new StepList();
-//            stepListB.addStep(stepB);
-//            c.addRecipe(new Recipe("Toast", ingListB, stepListB));
+
+
+// writes ingredients and steps to the wrong recipe if more than one is added?
+            Ingredient bread = new Ingredient("Bread", 1, "Slice");
+            IngredientList ingListB = new IngredientList();
+            ingListB.addIngredient(bread);
+            Step stepB = new Step(1, "Toast the bread");
+            StepList stepListB = new StepList();
+            stepListB.addStep(stepB);
+            c.addRecipe(new Recipe("Toast", ingListB, stepListB));
 
 
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralCookbook.json");
@@ -70,9 +72,9 @@ public class JsonWriterTest extends JsonTest {
             JsonReader reader = new JsonReader("./data/testWriterGeneralCookbook.json");
             c = reader.read();
             List<Recipe> recipes = c.getRecipeList();
-            assertEquals(1, recipes.size());
+            assertEquals(2, recipes.size());
             checkRecipe("Fried egg", recipes.get(0).getIngredients(), recipes.get(0).getSteps(), recipes.get(0));
-//            checkRecipe("Toast", recipes.get(1).getIngredients(), recipes.get(1).getSteps(), recipes.get(1));
+            checkRecipe("Toast", recipes.get(1).getIngredients(), recipes.get(1).getSteps(), recipes.get(1));
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

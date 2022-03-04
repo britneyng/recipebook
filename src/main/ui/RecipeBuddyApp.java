@@ -12,7 +12,7 @@ import java.util.Scanner;
 // Repo:
 
 
-// Referenced code from JsonSerializationDemo
+// Referenced code from JsonSerializationDemo - note that classes contained in the persistence folder utilize this code
 // Repo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 
@@ -23,12 +23,6 @@ public class RecipeBuddyApp {
     private Cookbook cookbook = new Cookbook();
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
-
-    // refactor code later so that these fields are not used
-    private IngredientList ingredientList;
-    private StepList stepList;
-    private Ingredient ingredient;
-    private Step step;
 
     // EFFECTS: runs the Cookbook app
     public RecipeBuddyApp() {
@@ -69,7 +63,7 @@ public class RecipeBuddyApp {
         if (command.equals("view")) {
             viewAllRecipes();
         } else if (command.equals("read")) {
-            viewSingleRecipe();
+            readRecipe();
         } else if (command.equals("write")) {
             createRecipe();
         } else if (command.equals("remove")) {
@@ -95,23 +89,22 @@ public class RecipeBuddyApp {
         System.out.println("\tq -> quit");
     }
 
-    // EFFECTS: Creates a recipe with a name, ingredient list, and step list
+    // MODIFIES: this
+    // EFFECTS: creates a recipe with a name, ingredient list, and step list
     private void createRecipe() {
         System.out.println("Name your recipe:");
         String recipeName = input.next();
-
-        createIngredientList(ingredientList);
-        writeStepList(stepList);
-        cookbook.addRecipe(new Recipe(recipeName, ingredientList, stepList));
+        cookbook.addRecipe(new Recipe(recipeName, createIngredientList(), writeStepList()));
         System.out.println("The recipe has been added to the Cookbook :)");
 
     }
 
     // EFFECTS: creates an ingredient list for the recipe
-    private void createIngredientList(IngredientList ingredients) {
+    private IngredientList createIngredientList() {
         System.out.println("Let's add some ingredients!");
         System.out.println("How many ingredients are in this recipe?");
         int quantity = input.nextInt();
+        IngredientList ingList = new IngredientList();
 
         for (int i = 0; (i != quantity); i++) {
             System.out.println("What's the name of your ingredient?");
@@ -121,29 +114,29 @@ public class RecipeBuddyApp {
             System.out.println("Enter the unit: ");
             String ingredientUnit = input.next();
 
-            ingredient =  new Ingredient(ingredientName, ingredientAmount, ingredientUnit);
-            ingredients = new IngredientList();
-            ingredients.addIngredient(ingredient);
-            ingredients.getIngredientList();
-
+            Ingredient ing = new Ingredient(ingredientName, ingredientAmount, ingredientUnit);
+            ingList.addIngredient(ing);
         }
+        return ingList;
     }
 
     // EFFECTS: creates a step list for the recipe
-    public void writeStepList(StepList stepList) {
+    public StepList writeStepList() {
         System.out.println("Let's add some steps for your recipe!");
         System.out.println("How many steps are in this recipe?");
 
+        StepList stepList = new StepList();
         int quantity = input.nextInt();
         for (int i = 0; (i != quantity); i++) {
             System.out.println("Enter the step number: ");
             int stepNumber = input.nextInt();
             System.out.println("Enter the instructions for this step: ");
             String instruction = input.next();
-            step = new Step(stepNumber, instruction);
-            stepList = new StepList();
+
+            Step step = new Step(stepNumber, instruction);
             stepList.addStep(step);
         }
+        return stepList;
     }
 
     // EFFECTS: lists recipes to be viewed by the user
@@ -153,7 +146,7 @@ public class RecipeBuddyApp {
     }
 
     // EFFECTS: view single recipe in detail
-    public void viewSingleRecipe() {
+    public void readRecipe() {
         System.out.println("Which recipe would you like to access?");
         listRecipes();
         String recipeToView = input.next();
