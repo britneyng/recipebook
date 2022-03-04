@@ -151,7 +151,7 @@ public class RecipeBuddyApp {
         listRecipes();
         String recipeToView = input.next();
         cookbook.findRecipe(recipeToView);
-        cookbook.getRecipe(recipeToView);
+        cookbook.printRecipe(recipeToView);
 
     }
 

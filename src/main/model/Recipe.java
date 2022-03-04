@@ -41,12 +41,8 @@ public class Recipe implements Writable {
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("name", recipeTitle);
-        if (ingredients != null) {
-            json.put("ingredients", ingredients.toJson());
-        }
-        if (steps != null) {
-            json.put("steps", steps.toJson());
-        }
+        json.put("ingredients", ingredients.toJson());
+        json.put("steps", steps.toJson());
         return json;
     }
 }

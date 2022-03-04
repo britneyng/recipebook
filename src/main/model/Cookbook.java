@@ -50,12 +50,12 @@ public class Cookbook implements Writable {
 
     // REQUIRES: Cookbook must contain at least one recipe
     // EFFECTS: prints recipe as a string (viewable format)
-    public String getRecipe(String recipe) {
+    public String printRecipe(String recipe) {
         String recipeToPrint = "";
         String result  = "";
 
         for (Recipe r : recipes) {
-            if (r.getRecipeTitle().equals(recipe)) {
+            if (r.getRecipeTitle() == (recipe)) {
                 recipeToPrint += r.getRecipeTitle();
                 recipeToPrint += "\n";
                 recipeToPrint += "Ingredients:" + "\n";

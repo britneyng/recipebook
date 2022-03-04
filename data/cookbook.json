@@ -1,53 +1,26 @@
 {"recipes": [
     {
-        "name": "Eggs",
+        "name": "Eggs V2",
         "ingredients": {"ingredient list": [{
             "ingredient amount": 1,
             "ingredient unit": "whole",
             "ingredient name": "Egg"
         }]},
         "steps": {"step list": [{
-            "instructions": "Fry egg",
+            "instructions": "Boil egg",
             "step number": 1
         }]}
     },
     {
-        "name": "Spam Musubi",
-        "ingredients": {"ingredient list": [
-            {
-                "ingredient amount": 1,
-                "ingredient unit": "can",
-                "ingredient name": "Spam"
-            },
-            {
-                "ingredient amount": 1,
-                "ingredient unit": "cup",
-                "ingredient name": "Rice"
-            },
-            {
-                "ingredient amount": 1,
-                "ingredient unit": "sheet",
-                "ingredient name": "Nori"
-            },
-            {
-                "ingredient amount": 1,
-                "ingredient unit": "tbsp",
-                "ingredient name": "Soy sauce"
-            }
-        ]},
-        "steps": {"step list": [
-            {
-                "instructions": "Wash and cook the rice",
-                "step number": 1
-            },
-            {
-                "instructions": "Cut spam into equal slices and fry with the soy sauce",
-                "step number": 2
-            },
-            {
-                "instructions": "Assemble your ingredients in spam-musubi form!!",
-                "step number": 3
-            }
-        ]}
+        "name": "tomato",
+        "ingredients": {"ingredient list": [{
+            "ingredient amount": 1,
+            "ingredient unit": "whole",
+            "ingredient name": "tomato"
+        }]},
+        "steps": {"step list": [{
+            "instructions": "add tomato",
+            "step number": 1
+        }]}
     }
 ]}

@@ -77,4 +77,23 @@ public class CookbookTest {
         testCookbook.addRecipe(testRecipeC);
         assertEquals(3, testCookbook.getRecipeList().size());
     }
+
+    @Test
+    void testPrintRecipe() {
+        testCookbook.addRecipe(testRecipeB);
+        System.out.println(testCookbook.printRecipe("Fried Egg Version 2"));
+        assertEquals("Fried Egg Version 2"
+                        + "\n"
+                        + "Ingredients:"
+                        + "\n"
+                        + "Egg, 1.0 whole"
+                        + "\n"
+                        + "Steps:"
+                        + "\n"
+                        + "Add oil to pan"
+                        + "\n"
+                        + "Crack egg"
+                        + "\n"
+                , testCookbook.printRecipe("Fried Egg Version 2"));
+    }
 }
