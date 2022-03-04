@@ -35,7 +35,7 @@ public class StepList implements Writable {
 
     // EFFECTS: return a list of the steps for a recipe
     public String getSteps() {
-        String result  = "";
+        String result = "";
         String step = "";
 
         for (Step s : stepList) {
@@ -56,7 +56,7 @@ public class StepList implements Writable {
     }
 
     // EFFECTS: returns things in this workroom as a JSON array
-    private JSONArray stepListToJSON() {
+    private JSONArray stepListToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Step s : stepList) {
@@ -69,7 +69,7 @@ public class StepList implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("step list", stepListToJSON());
+        json.put("step list", stepListToJson());
         return json;
     }
 }

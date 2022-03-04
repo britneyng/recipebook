@@ -75,12 +75,12 @@ public class Cookbook implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
-        json.put("recipes", recipesToJSON());
+        json.put("recipes", recipesToJson());
         return json;
     }
 
     // EFFECTS: returns things in this cookbook as a JSON array
-    private JSONArray recipesToJSON() {
+    private JSONArray recipesToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (Recipe r : recipes) {
