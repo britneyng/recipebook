@@ -46,7 +46,7 @@ public class StepList implements Writable {
         return result;
     }
 
-    // use this to handle exception from removeStep later!
+    // tester method
     // EFFECTS: return true is StepList contains specified step and false otherwise
     public Boolean hasStep(Step step) {
         if (stepList.contains(step)) {

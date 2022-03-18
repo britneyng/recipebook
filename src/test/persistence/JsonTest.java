@@ -1,8 +1,6 @@
 package persistence;
 
-import model.IngredientList;
 import model.Recipe;
-import model.StepList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
