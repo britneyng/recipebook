@@ -39,4 +39,9 @@ public class Recipe implements Writable {
         json.put("steps", steps.toJson());
         return json;
     }
+
+    @Override
+    public String toString() {
+        return recipeTitle;
+    }
 }

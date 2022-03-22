@@ -1,18 +1,26 @@
-{"recipes": [{
-    "name": "spam",
-    "ingredients": {"ingredient list": [{
-        "ingredient amount": 1,
-        "ingredient unit": "can",
-        "ingredient name": "spam"
-    }]},
-    "steps": {"step list": [
-        {
-            "instructions": "open the can",
+{"recipes": [
+    {
+        "name": "Fried egg",
+        "ingredients": {"ingredient list": [{
+            "ingredient amount": 1,
+            "ingredient unit": "Whole",
+            "ingredient name": "Egg"
+        }]},
+        "steps": {"step list": [{
+            "instructions": "Fry the egg",
             "step number": 1
-        },
-        {
-            "instructions": "remove the spam",
-            "step number": 2
-        }
-    ]}
-}]}
+        }]}
+    },
+    {
+        "name": "Toast",
+        "ingredients": {"ingredient list": [{
+            "ingredient amount": 1,
+            "ingredient unit": "Slice",
+            "ingredient name": "Bread"
+        }]},
+        "steps": {"step list": [{
+            "instructions": "Toast the bread",
+            "step number": 1
+        }]}
+    }
+]}
