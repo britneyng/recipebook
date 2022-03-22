@@ -58,8 +58,10 @@ public class Cookbook implements Writable {
             if (r.getRecipeTitle().equals(recipe)) {
                 recipeToPrint += r.getRecipeTitle();
                 recipeToPrint += "\n";
+                recipeToPrint += "\n";
                 recipeToPrint += "Ingredients:" + "\n";
                 recipeToPrint += r.getIngredients();
+                recipeToPrint += "\n";
                 recipeToPrint += "Steps:" + "\n";
                 recipeToPrint += r.getSteps();
                 result += recipeToPrint;

@@ -54,7 +54,6 @@ public class JsonWriterTest extends JsonTest {
             c.addRecipe(new Recipe("Fried egg", ingList, stepList));
 
 
-// writes ingredients and steps to the wrong recipe if more than one is added?
             Ingredient bread = new Ingredient("Bread", 1, "Slice");
             IngredientList ingListB = new IngredientList();
             ingListB.addIngredient(bread);

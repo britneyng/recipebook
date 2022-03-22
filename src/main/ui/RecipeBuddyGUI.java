@@ -12,6 +12,9 @@ import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// TODO: redo the button setup so that it uses a jpanel -> boxlayout with invisible components
+// TODO: add the write recipe functionality
+// TODO: figure out why there is no scroll bar on the jlist -> maybe because not enough elements to actually fill?
 
 /**
  * Representation of the GUI for the RecipeBuddyApp
@@ -46,19 +49,17 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         setupFrame();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-
-        // new button -> action listener -> action performer ->
+        this.setVisible(true);
     }
 
     // EFFECTS: initialize the frame
     public void initFrame() {
-        frame = new JFrame("Your RecipeBuddy!");
-        setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        revalidate();
-        repaint();
-        setVisible(true);
+        this.setTitle("Your RecipeBuddy :)");
+        this.setSize(WIDTH, HEIGHT);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(null);
+        this.revalidate();
+        this.repaint();
     }
 
     // EFFECTS: setup elements within the frame

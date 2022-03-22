@@ -4,7 +4,6 @@ import model.*;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,6 +16,7 @@ import java.util.Scanner;
 // Repo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 
+// Console version of RecipeBuddy
 public class RecipeBuddyApp {
 
     private static final String JSON_STORE = "./data/cookbook.json";

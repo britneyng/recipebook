@@ -85,9 +85,11 @@ public class CookbookTest {
         assertEquals(null, testCookbook.printRecipe("Fried Egg Version 1"));
         assertEquals("Fried Egg Version 2"
                         + "\n"
+                        + "\n"
                         + "Ingredients:"
                         + "\n"
                         + "Egg, 1.0 whole"
+                        + "\n"
                         + "\n"
                         + "Steps:"
                         + "\n"
