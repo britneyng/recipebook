@@ -30,7 +30,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     private DefaultListModel model;
     JFrame frame;
     JList<Recipe> recipeList;
-    JPanel panel;
+    JPanel displayPanel;
     JScrollPane listScrollPane;
     JButton addRecipeButton;
     JButton readRecipeButton;
@@ -68,15 +68,17 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         add(removeRecipeButton);
         add(saveButton);
         add(loadButton);
-        add(panel);
+        add(displayPanel);
         add(listScrollPane);
     }
 
     public void setupPanels() {
-        panel = new JPanel();
-        panel.setBounds(250, 50, 350, 300);
-        panel.setBackground(Color.lightGray);
-        panel.setVisible(true);
+        displayPanel = new JPanel();
+        displayPanel.setLayout(null);
+        displayPanel.setBounds(250, 50, 350, 300);
+        displayPanel.setBackground(Color.lightGray);
+        displayPanel.setVisible(true);
+
     }
 
     public void setupButtons() {
@@ -107,34 +109,18 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
     public void setupList() {
-/**
- the following is a test object which should be removed later!
- */
-        IngredientList ingList = new IngredientList();
-        Ingredient testIng = new Ingredient("Egg", 1, "whole");
-        Step testStep = new Step(1, "Add oil to pan");
-        StepList stepList = new StepList();
-        ingList.addIngredient(testIng);
-        stepList.addStep(testStep);
-
-        // add JList to scroll pane
         model = new DefaultListModel();
         recipeList = new JList(cookbook.getRecipeList().toArray());
         recipeList.setModel(model);
         refreshModel();
-//        cookbook.addRecipe(new Recipe("egg", ingList, stepList));
-//        model.addElement(new Recipe("egg2", ingList, stepList));
-
         recipeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         recipeList.setSelectedIndex(0);
         recipeList.addListSelectionListener(this);
         recipeList.setVisibleRowCount(3);
+        recipeList.setFixedCellHeight(27);
         listScrollPane = new JScrollPane(recipeList);
         listScrollPane.setBounds(250, 50, 350, 300);
-        panel.add(listScrollPane);
-        panel.add(recipeList);
-
-
+        displayPanel.add(listScrollPane, BorderLayout.CENTER);
 
     }
 
@@ -170,6 +156,12 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            int index = recipeList.getSelectedIndex();
+            String recipeName = cookbook.getRecipeList().get(index).getRecipeTitle();
+            JTextArea readArea = new JTextArea(10, 20);
+            readArea.append(cookbook.printRecipe(recipeName));
+            JScrollPane scrollPane = new JScrollPane(readArea);
+            JOptionPane.showMessageDialog(frame, scrollPane);
 
         }
     }
@@ -186,17 +178,22 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            int index = recipeList.getSelectedIndex();
+
             int response = (JOptionPane.showConfirmDialog(null,
-                    "Would you like to remove this recipe from the cookbook?",
+                    "Would you like to remove the recipe "
+                            + cookbook.getRecipeList().get(index).getRecipeTitle()
+                            + " from the cookbook?",
                     "Remove recipe?", JOptionPane.YES_NO_OPTION));
 
             if (response == (JOptionPane.YES_OPTION)) {
-                int index = recipeList.getSelectedIndex();
+
                 cookbook.getRecipeList().remove(index);
                 model.removeElementAt(index);
                 refreshModel();
                 revalidate();
                 repaint();
+                JOptionPane.showMessageDialog(null, "The recipe has been removed!");
             }
 
         }
