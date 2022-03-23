@@ -51,6 +51,8 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     JTextField stepInstructions;
     int createAnotherIng;
     int createAnotherStep;
+    IngredientList ingList;
+    StepList stepList;
 
 
     public RecipeBuddyGUI() {
@@ -161,18 +163,15 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         public void actionPerformed(ActionEvent e) {
             recipeTitleField();
             Object[] titleField = {"Recipe Title", recipeTitleField};
+            ingList = new IngredientList();
+            stepList = new StepList();
             int response = JOptionPane.showConfirmDialog(null, titleField,
                     "What is the name of your recipe?", JOptionPane.OK_CANCEL_OPTION);
             if (response == (JOptionPane.OK_OPTION)) {
                 promptUserForIngredients();
-                promptUserForSteps();
 
-                cookbook.addRecipe(new Recipe(recipeTitleField.getText(),
-                        promptUserForIngredients(),
-                        promptUserForSteps()));
-                model.addElement(new Recipe(recipeTitleField.getText(),
-                        promptUserForIngredients(),
-                        promptUserForSteps()));
+                cookbook.addRecipe(new Recipe(recipeTitleField.getText(), ingList, stepList));
+                model.addElement(new Recipe(recipeTitleField.getText(), ingList, stepList));
                 refreshModel();
 
             }
@@ -292,10 +291,10 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     // EFFECTS: handles user input and prompts for ingredients to be added to the recipe
     private IngredientList promptUserForIngredients() {
         ingredientFields();
-        IngredientList ingList = new IngredientList();
         Object[] ingredientInputs = {"Ingredient Name", ingredientNameField, "Ingredient Amount", ingredientAmountField,
                 "Ingredient Unit", ingredientUnitField};
         do {
+            setEmptyIngFields();
             createAnotherIng = JOptionPane.showConfirmDialog(null, ingredientInputs,
                     "Writer", JOptionPane.OK_CANCEL_OPTION);
             if (JOptionPane.CANCEL_OPTION == createAnotherIng || (checkEmptyIngFields() == true)) {
@@ -318,10 +317,10 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: handles user input and prompts for steps to be added to the recipe
     private StepList promptUserForSteps() {
-        StepList stepList = new StepList();
         stepFields();
         Object[] stepInputs = {"Step Number", stepNum, "Step Instruction", stepInstructions,};
         do {
+            setEmptyStepFields();
             createAnotherStep = JOptionPane.showConfirmDialog(null, stepInputs,
                     "Writer", JOptionPane.OK_CANCEL_OPTION);
             if (JOptionPane.CANCEL_OPTION == createAnotherStep || (checkEmptyStepFields() == true)) {
@@ -330,7 +329,10 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
                         "Done adding steps?", JOptionPane.YES_NO_OPTION);
                 if (JOptionPane.NO_OPTION == r) {
                     promptUserForSteps();
+                } else if (JOptionPane.YES_OPTION == r) {
+                    return stepList;
                 }
+
             } else {
                 stepList.addStep(new Step(parseInt(stepNum.getText()), stepInstructions.getText()));
             }
@@ -345,9 +347,20 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: initialize new text fields
     private void ingredientFields() {
-        ingredientNameField = new JTextField("");
-        ingredientAmountField = new JTextField("");
-        ingredientUnitField = new JTextField("");
+        ingredientNameField = new JTextField();
+        ingredientAmountField = new JTextField();
+        ingredientUnitField = new JTextField();
+    }
+
+    private void setEmptyIngFields() {
+        ingredientNameField.setText("");
+        ingredientAmountField.setText("");
+        ingredientUnitField.setText("");
+    }
+
+    private void setEmptyStepFields() {
+        stepNum.setText("");
+        stepInstructions.setText("");
     }
 
     // EFFECTS: check if any of the fields have been left blank and return true if so
