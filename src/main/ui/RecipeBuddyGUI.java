@@ -12,9 +12,12 @@ import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import static java.lang.Integer.parseInt;
+
 // TODO: redo the button setup so that it uses a jpanel -> boxlayout with invisible components
 // TODO: add the write recipe functionality
 // TODO: figure out why there is no scroll bar on the jlist -> maybe because not enough elements to actually fill?
+// TODO: create a splash screen if time allows
 
 /**
  * Representation of the GUI for the RecipeBuddyApp
@@ -40,6 +43,15 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     JButton removeRecipeButton;
     JButton saveButton;
     JButton loadButton;
+    JTextField recipeTitleField;
+    JTextField ingredientNameField;
+    JTextField ingredientAmountField;
+    JTextField ingredientUnitField;
+    JTextField stepNum;
+    JTextField stepInstructions;
+    int createAnotherIng;
+    int createAnotherStep;
+
 
     public RecipeBuddyGUI() {
         initFrame();
@@ -49,6 +61,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         setupFrame();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+        this.centreOnScreen();
         this.setVisible(true);
     }
 
@@ -62,7 +75,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         this.repaint();
     }
 
-    // EFFECTS: setup elements within the frame
+    // EFFECTS: initialize elements within the frame
     public void setupFrame() {
         add(addRecipeButton);
         add(readRecipeButton);
@@ -73,6 +86,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         add(listScrollPane);
     }
 
+    // EFFECTS: initialize the display panel and button panel
     public void setupPanels() {
         displayPanel = new JPanel();
         displayPanel.setLayout(null);
@@ -82,6 +96,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     }
 
+    // EFFECTS: initialize the buttons
     public void setupButtons() {
         addRecipeButton = new JButton(new AddRecipeAction());
         addRecipeButton.setBounds(BUTTON_X_POS, 50, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -107,8 +122,10 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         loadButton.setBounds(BUTTON_X_POS, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
         loadButton.setText("Load Cookbook");
         loadButton.setVisible(true);
+
     }
 
+    // EFFECTS: initialize the JList that displays each recipe of the cookbook
     public void setupList() {
         model = new DefaultListModel();
         recipeList = new JList(cookbook.getRecipeList().toArray());
@@ -125,6 +142,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     }
 
+    // from implementing ListSelectionListener
     @Override
     public void valueChanged(ListSelectionEvent e) {
 
@@ -141,8 +159,23 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            recipeTitleField();
+            Object[] titleField = {"Recipe Title", recipeTitleField};
+            int response = JOptionPane.showConfirmDialog(null, titleField,
+                    "What is the name of your recipe?", JOptionPane.OK_CANCEL_OPTION);
+            if (response == (JOptionPane.OK_OPTION)) {
+                promptUserForIngredients();
+                promptUserForSteps();
 
-            // for add recipe action
+                cookbook.addRecipe(new Recipe(recipeTitleField.getText(),
+                        promptUserForIngredients(),
+                        promptUserForSteps()));
+                model.addElement(new Recipe(recipeTitleField.getText(),
+                        promptUserForIngredients(),
+                        promptUserForSteps()));
+                refreshModel();
+
+            }
         }
     }
 
@@ -157,9 +190,10 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+
             int index = recipeList.getSelectedIndex();
             String recipeName = cookbook.getRecipeList().get(index).getRecipeTitle();
-            JTextArea readArea = new JTextArea(10, 20);
+            JTextArea readArea = new JTextArea();
             readArea.append(cookbook.printRecipe(recipeName));
             JScrollPane scrollPane = new JScrollPane(readArea);
             JOptionPane.showMessageDialog(frame, scrollPane);
@@ -192,8 +226,6 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
                 cookbook.getRecipeList().remove(index);
                 model.removeElementAt(index);
                 refreshModel();
-                revalidate();
-                repaint();
                 JOptionPane.showMessageDialog(null, "The recipe has been removed!");
             }
 
@@ -216,6 +248,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
                 jsonWriter.write(cookbook);
                 jsonWriter.close();
                 System.out.println("Saved recipes to " + JSON_STORE);
+                JOptionPane.showMessageDialog(null, "Your recipes have been saved :)");
             } catch (FileNotFoundException ex) {
                 System.out.println("File not found.");
             }
@@ -246,7 +279,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
 
-    // EFFECTS: loops through every recipe in the cookbook and fills the model with an updated list of recipes
+    // EFFECTS: updates the model with an updated list of recipes in the Cookbook
     private void refreshModel() {
         int i = 0;
         model.clear();
@@ -256,5 +289,99 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         }
     }
 
+    // EFFECTS: handles user input and prompts for ingredients to be added to the recipe
+    private IngredientList promptUserForIngredients() {
+        ingredientFields();
+        IngredientList ingList = new IngredientList();
+        Object[] ingredientInputs = {"Ingredient Name", ingredientNameField, "Ingredient Amount", ingredientAmountField,
+                "Ingredient Unit", ingredientUnitField};
+        do {
+            createAnotherIng = JOptionPane.showConfirmDialog(null, ingredientInputs,
+                    "Writer", JOptionPane.OK_CANCEL_OPTION);
+            if (JOptionPane.CANCEL_OPTION == createAnotherIng || (checkEmptyIngFields() == true)) {
+                int r = JOptionPane.showConfirmDialog(null,
+                        "You've left some boxes blank, are you done adding ingredients?",
+                        "Done adding ingredients?", JOptionPane.YES_NO_OPTION);
+                if (JOptionPane.YES_OPTION == r) {
+                    promptUserForSteps();
+                } else if (JOptionPane.NO_OPTION == r) {
+                    promptUserForIngredients();
+                }
+            } else {
+                ingList.addIngredient(new Ingredient(ingredientNameField.getText(),
+                        Double.parseDouble(ingredientAmountField.getText()),
+                        ingredientUnitField.getText()));
+            }
+        } while (createAnotherIng == JOptionPane.OK_OPTION); // INGREDIENT PANE OK
+        return ingList;
+    }
+
+    // EFFECTS: handles user input and prompts for steps to be added to the recipe
+    private StepList promptUserForSteps() {
+        StepList stepList = new StepList();
+        stepFields();
+        Object[] stepInputs = {"Step Number", stepNum, "Step Instruction", stepInstructions,};
+        do {
+            createAnotherStep = JOptionPane.showConfirmDialog(null, stepInputs,
+                    "Writer", JOptionPane.OK_CANCEL_OPTION);
+            if (JOptionPane.CANCEL_OPTION == createAnotherStep || (checkEmptyStepFields() == true)) {
+                int r = JOptionPane.showConfirmDialog(null,
+                        "You've left some boxes blank, are you done adding steps?",
+                        "Done adding steps?", JOptionPane.YES_NO_OPTION);
+                if (JOptionPane.NO_OPTION == r) {
+                    promptUserForSteps();
+                }
+            } else {
+                stepList.addStep(new Step(parseInt(stepNum.getText()), stepInstructions.getText()));
+            }
+        } while (createAnotherStep == JOptionPane.OK_OPTION); // STEP PANE OK
+        return stepList;
+
+    }
+
+    private void recipeTitleField() {
+        recipeTitleField = new JTextField();
+    }
+
+    // EFFECTS: initialize new text fields
+    private void ingredientFields() {
+        ingredientNameField = new JTextField("");
+        ingredientAmountField = new JTextField("");
+        ingredientUnitField = new JTextField("");
+    }
+
+    // EFFECTS: check if any of the fields have been left blank and return true if so
+    private Boolean checkEmptyIngFields() {
+        if ((ingredientNameField.equals(""))
+                || (ingredientAmountField.equals(""))
+                || (ingredientUnitField.equals(""))) {
+            return true;
+        }
+        return false;
+    }
+
+    // EFFECTS: check if either field is left blank and return true if so
+    private Boolean checkEmptyStepFields() {
+        if (stepNum.equals("") || (stepInstructions.equals(""))) {
+            return true;
+        }
+        return false;
+    }
+
+    // EFFECTS: initializes the Step text fields
+    private void stepFields() {
+        stepNum = new JTextField("");
+        stepInstructions = new JTextField("");
+
+    }
+
+    /**
+     * Helper to centre main application window on desktop
+     */
+    private void centreOnScreen() {
+        int width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        int height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
+    }
 
 }

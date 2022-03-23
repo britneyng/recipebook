@@ -39,7 +39,9 @@ public class StepList implements Writable {
         String step = "";
 
         for (Step s : stepList) {
-            step = s.getInstructions();
+            step = String.valueOf(s.getStepNumber());
+            step += ". ";
+            step += s.getInstructions();
             step += "\n";
             result += step;
         }

@@ -54,7 +54,7 @@ public class StepListTest {
        testList.addStep(stepA);
        testList.addStep(stepB);
        testList.addStep(stepC);
-       assertEquals("Add water to pot" + "\n" + "Turn heat to high"
-               + "\n" + "Wait to boil" + "\n", testList.getSteps());
+       assertEquals("1. Add water to pot" + "\n" + "2. Turn heat to high"
+               + "\n" + "3. Wait to boil" + "\n", testList.getSteps());
    }
 }
