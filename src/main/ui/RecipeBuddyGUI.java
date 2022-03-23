@@ -14,16 +14,13 @@ import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
-// TODO: redo the button setup so that it uses a jpanel -> boxlayout with invisible components
-// TODO: add the write recipe functionality
-// TODO: figure out why there is no scroll bar on the jlist -> maybe because not enough elements to actually fill?
-// TODO: create a splash screen if time allows
-
 /**
  * Representation of the GUI for the RecipeBuddyApp
  */
+
 public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
+    private static final String IMAGE = "./images/splash.jpeg";
     private static final String JSON_STORE = "./data/cookbook.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -54,13 +51,13 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     IngredientList ingList;
     StepList stepList;
 
-
     public RecipeBuddyGUI() {
+        initSplash();
+        startFrame();
+        initButtons();
+        initPanels();
+        initList();
         initFrame();
-        setupButtons();
-        setupPanels();
-        setupList();
-        setupFrame();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         this.centreOnScreen();
@@ -68,7 +65,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
     // EFFECTS: initialize the frame
-    public void initFrame() {
+    public void startFrame() {
         this.setTitle("Your RecipeBuddy :)");
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +75,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
     // EFFECTS: initialize elements within the frame
-    public void setupFrame() {
+    public void initFrame() {
         add(addRecipeButton);
         add(readRecipeButton);
         add(removeRecipeButton);
@@ -89,7 +86,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
     // EFFECTS: initialize the display panel and button panel
-    public void setupPanels() {
+    public void initPanels() {
         displayPanel = new JPanel();
         displayPanel.setLayout(null);
         displayPanel.setBounds(250, 50, 350, 300);
@@ -99,7 +96,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
     // EFFECTS: initialize the buttons
-    public void setupButtons() {
+    public void initButtons() {
         addRecipeButton = new JButton(new AddRecipeAction());
         addRecipeButton.setBounds(BUTTON_X_POS, 50, BUTTON_WIDTH, BUTTON_HEIGHT);
         addRecipeButton.setText("Write a Recipe");
@@ -128,7 +125,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     }
 
     // EFFECTS: initialize the JList that displays each recipe of the cookbook
-    public void setupList() {
+    public void initList() {
         model = new DefaultListModel();
         recipeList = new JList(cookbook.getRecipeList().toArray());
         recipeList.setModel(model);
@@ -141,12 +138,6 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         listScrollPane = new JScrollPane(recipeList);
         listScrollPane.setBounds(250, 50, 350, 300);
         displayPanel.add(listScrollPane, BorderLayout.CENTER);
-
-    }
-
-    // from implementing ListSelectionListener
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
 
     }
 
@@ -166,7 +157,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
             ingList = new IngredientList();
             stepList = new StepList();
             int response = JOptionPane.showConfirmDialog(null, titleField,
-                    "What is the name of your recipe?", JOptionPane.OK_CANCEL_OPTION);
+                    "Name your recipe!", JOptionPane.OK_CANCEL_OPTION);
             if (response == (JOptionPane.OK_OPTION)) {
                 promptUserForIngredients();
 
@@ -299,7 +290,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
                     "Writer", JOptionPane.OK_CANCEL_OPTION);
             if (JOptionPane.CANCEL_OPTION == createAnotherIng || (checkEmptyIngFields() == true)) {
                 int r = JOptionPane.showConfirmDialog(null,
-                        "You've left some boxes blank, are you done adding ingredients?",
+                        "Are you done adding ingredients to your recipe?",
                         "Done adding ingredients?", JOptionPane.YES_NO_OPTION);
                 if (JOptionPane.YES_OPTION == r) {
                     promptUserForSteps();
@@ -325,7 +316,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
                     "Writer", JOptionPane.OK_CANCEL_OPTION);
             if (JOptionPane.CANCEL_OPTION == createAnotherStep || (checkEmptyStepFields() == true)) {
                 int r = JOptionPane.showConfirmDialog(null,
-                        "You've left some boxes blank, are you done adding steps?",
+                        "Are you done adding steps to your recipe?",
                         "Done adding steps?", JOptionPane.YES_NO_OPTION);
                 if (JOptionPane.NO_OPTION == r) {
                     promptUserForSteps();
@@ -388,13 +379,33 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     }
 
-    /**
-     * Helper to centre main application window on desktop
-     */
+
+    // EFFECTS: initializes a splash screen that appears while the main application is loading
+    private void initSplash() {
+        JWindow window = new JWindow();
+        window.getContentPane().add(
+                new JLabel(new ImageIcon(IMAGE)));
+        centreOnScreen();
+        window.setSize(500, 500);
+        window.setVisible(true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            System.out.println("Window was interrupted. Please try again.");
+        }
+        window.setVisible(false);
+        window.dispose();
+    }
+
+    // EFFECTS: centres the window on the screen
     private void centreOnScreen() {
         int width = Toolkit.getDefaultToolkit().getScreenSize().width;
         int height = Toolkit.getDefaultToolkit().getScreenSize().height;
         setLocation((width - getWidth()) / 2, (height - getHeight()) / 2);
     }
 
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+
+    }
 }

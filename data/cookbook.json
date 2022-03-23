@@ -1,12 +1,26 @@
-{"recipes": [{
-    "name": "Egg",
-    "ingredients": {"ingredient list": [{
-        "ingredient amount": 1,
-        "ingredient unit": "whole",
-        "ingredient name": "Egg"
-    }]},
-    "steps": {"step list": [{
-        "instructions": "Fry egg",
-        "step number": 1
-    }]}
-}]}
+{"recipes": [
+    {
+        "name": "Fried egg",
+        "ingredients": {"ingredient list": [{
+            "ingredient amount": 1,
+            "ingredient unit": "Whole",
+            "ingredient name": "Egg"
+        }]},
+        "steps": {"step list": [{
+            "instructions": "Fry the egg",
+            "step number": 1
+        }]}
+    },
+    {
+        "name": "Toast",
+        "ingredients": {"ingredient list": [{
+            "ingredient amount": 1,
+            "ingredient unit": "Slice",
+            "ingredient name": "Bread"
+        }]},
+        "steps": {"step list": [{
+            "instructions": "Toast the bread",
+            "step number": 1
+        }]}
+    }
+]}
