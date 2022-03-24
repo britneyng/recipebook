@@ -43,7 +43,12 @@ public class RecipeTest {
 
     @Test
     void getCurrentStepTest() {
-        assertEquals("Add oil to pan" + "\n" + "Crack egg" + "\n", testRecipe.getSteps());
+        assertEquals("1. Add oil to pan" + "\n" + "2. Crack egg" + "\n", testRecipe.getSteps());
+    }
+
+    @Test
+    void toStringTest() {
+        assertEquals("Fried Egg", testRecipe.toString());
     }
 }
 

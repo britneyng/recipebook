@@ -93,9 +93,9 @@ public class CookbookTest {
                         + "\n"
                         + "Steps:"
                         + "\n"
-                        + "Add oil to pan"
+                        + "1. Add oil to pan"
                         + "\n"
-                        + "Crack egg"
+                        + "2. Crack egg"
                         + "\n"
                 , testCookbook.printRecipe("Fried Egg Version 2"));
     }
