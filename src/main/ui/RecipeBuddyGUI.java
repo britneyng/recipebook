@@ -52,6 +52,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     StepList stepList;
 
     public RecipeBuddyGUI() {
+        UIManager.put("OptionPane.minimumSize",new Dimension(350,150));
         initSplash();
         startFrame();
         initButtons();
@@ -66,7 +67,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: initialize the frame
     public void startFrame() {
-        this.setTitle("Your RecipeBuddy :)");
+        this.setTitle("Your RecipeBuddy!");
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -157,7 +158,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
             ingList = new IngredientList();
             stepList = new StepList();
             int response = JOptionPane.showConfirmDialog(null, titleField,
-                    "Name your recipe!", JOptionPane.OK_CANCEL_OPTION);
+                    "Name your recipe!", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (response == (JOptionPane.OK_OPTION)) {
                 promptUserForIngredients();
 
@@ -385,11 +386,10 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         JWindow window = new JWindow();
         window.getContentPane().add(
                 new JLabel(new ImageIcon(IMAGE)));
-        centreOnScreen();
-        window.setSize(500, 500);
+        window.setBounds(460, 200, 500, 500);
         window.setVisible(true);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(3500);
         } catch (InterruptedException e) {
             System.out.println("Window was interrupted. Please try again.");
         }
@@ -406,6 +406,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-
     }
+
+
 }
