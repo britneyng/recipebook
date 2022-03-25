@@ -14,6 +14,9 @@ import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
+// Button functionality was inspired by the AlarmSystem project:
+// REPO: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
+
 /**
  * Representation of the GUI for the RecipeBuddyApp
  */
@@ -340,9 +343,12 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     // EFFECTS: initialize new text fields
     private void ingredientFields() {
         ingredientNameField = new JTextField();
+
         ingredientAmountField = new JTextField();
         ingredientUnitField = new JTextField();
     }
+
+
 
     private void setEmptyIngFields() {
         ingredientNameField.setText("");
@@ -357,20 +363,14 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: check if any of the fields have been left blank and return true if so
     private Boolean checkEmptyIngFields() {
-        if ((ingredientNameField.equals(""))
+        return (ingredientNameField.equals(""))
                 || (ingredientAmountField.equals(""))
-                || (ingredientUnitField.equals(""))) {
-            return true;
-        }
-        return false;
+                || (ingredientUnitField.equals(""));
     }
 
     // EFFECTS: check if either field is left blank and return true if so
     private Boolean checkEmptyStepFields() {
-        if (stepNum.equals("") || (stepInstructions.equals(""))) {
-            return true;
-        }
-        return false;
+        return stepNum.equals("") || (stepInstructions.equals(""));
     }
 
     // EFFECTS: initializes the Step text fields

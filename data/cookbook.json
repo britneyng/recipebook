@@ -1,26 +1,47 @@
-{"recipes": [
-    {
-        "name": "Fried egg",
-        "ingredients": {"ingredient list": [{
+{"recipes": [{
+    "name": "Spam Musubi",
+    "ingredients": {"ingredient list": [
+        {
             "ingredient amount": 1,
-            "ingredient unit": "Whole",
-            "ingredient name": "Egg"
-        }]},
-        "steps": {"step list": [{
-            "instructions": "Fry the egg",
-            "step number": 1
-        }]}
-    },
-    {
-        "name": "Toast",
-        "ingredients": {"ingredient list": [{
+            "ingredient unit": "cup",
+            "ingredient name": "Rice"
+        },
+        {
             "ingredient amount": 1,
-            "ingredient unit": "Slice",
-            "ingredient name": "Bread"
-        }]},
-        "steps": {"step list": [{
-            "instructions": "Toast the bread",
+            "ingredient unit": "package",
+            "ingredient name": "Spam"
+        },
+        {
+            "ingredient amount": 1,
+            "ingredient unit": "sheet",
+            "ingredient name": "Nori"
+        },
+        {
+            "ingredient amount": 1,
+            "ingredient unit": "tbsp",
+            "ingredient name": "Soy Sauce"
+        }
+    ]},
+    "steps": {"step list": [
+        {
+            "instructions": "Wash and cook the rice",
             "step number": 1
-        }]}
-    }
-]}
+        },
+        {
+            "instructions": "Cut the spam into several slices",
+            "step number": 2
+        },
+        {
+            "instructions": "Fry the spam on each side for 2-3 minutes",
+            "step number": 3
+        },
+        {
+            "instructions": "Add soy sauce to each side before flipping",
+            "step number": 4
+        },
+        {
+            "instructions": "Assemble rice and spam in the can, and wrap a small strip of nori around each piece",
+            "step number": 5
+        }
+    ]}
+}]}

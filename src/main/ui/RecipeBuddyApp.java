@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 // Code referenced from TellerApp
-// Repo:
+// Repo: https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
 
 // Referenced code from JsonSerializationDemo - note that classes contained in the persistence folder utilize this code

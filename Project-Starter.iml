@@ -30,5 +30,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="json-20210307" level="project" />
+    <orderEntry type="library" name="flatlaf-intellij-themes-2.1" level="project" />
   </component>
 </module>
