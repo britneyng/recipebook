@@ -39,3 +39,22 @@ Strings to handle the ingredient/instruction component. I later made the design
 decision to reference the package structure from the FitLifeGym starter file to give the
 recipe components their own classes.
 
+### Phase 4 Part 2
+Mon Mar 28 23:19:12 PDT 2022
+Toast was removed from the Cookbook.
+
+Mon Mar 28 23:19:15 PDT 2022
+Oatmeal was removed from the Cookbook.
+
+Mon Mar 28 23:19:41 PDT 2022
+Dumpling was added to the Cookbook.
+
+Mon Mar 28 23:19:45 PDT 2022
+Shrimp Fried Rice was removed from the Cookbook.
+
+Mon Mar 28 23:19:48 PDT 2022
+Dumpling was removed from the Cookbook.
+
+Mon Mar 28 23:19:51 PDT 2022
+Shakshuka was removed from the Cookbook.
+

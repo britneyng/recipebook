@@ -23,6 +23,7 @@ public class Cookbook implements Writable {
     // EFFECTS: adds a recipe to the cookbook
     public void addRecipe(Recipe recipe) {
         recipes.add(recipe);
+        EventLog.getInstance().logEvent(new Event(recipe.getRecipeTitle() + " was added to the Cookbook."));
     }
 
     // REQUIRES: recipe must already exist in the cookbook
@@ -33,6 +34,8 @@ public class Cookbook implements Writable {
             Recipe r = recipes.get(i);
             if (r.getRecipeTitle().equals(recipe.getRecipeTitle())) {
                 recipes.remove(recipe);
+                EventLog.getInstance().logEvent(new Event(recipe.getRecipeTitle()
+                        + " was removed from the Cookbook."));
             }
         }
     }
@@ -81,6 +84,7 @@ public class Cookbook implements Writable {
     public int length() {
         return recipes.size();
     }
+
 
     @Override
     public JSONObject toJson() {

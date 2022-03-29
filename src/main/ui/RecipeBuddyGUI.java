@@ -1,6 +1,7 @@
 package ui;
 
 import model.*;
+import model.Event;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -9,12 +10,14 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static java.lang.Integer.parseInt;
 
-// Button functionality was inspired by the AlarmSystem project:
+// Implementation of functionality was inspired by the AlarmSystem project:
 // REPO: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 
 /**
@@ -55,7 +58,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     StepList stepList;
 
     public RecipeBuddyGUI() {
-        UIManager.put("OptionPane.minimumSize",new Dimension(350,150));
+        UIManager.put("OptionPane.minimumSize", new Dimension(350, 150));
         initSplash();
         startFrame();
         initButtons();
@@ -72,10 +75,30 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     public void startFrame() {
         this.setTitle("Your RecipeBuddy!");
         this.setSize(WIDTH, HEIGHT);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                int confirm = JOptionPane.showOptionDialog(
+                        null, "Are you sure you want to close?",
+                        "Close?", JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, null, null);
+                if (confirm == 0) {
+                    printLog();
+                    System.exit(0);
+                }
+            }
+        });
         this.revalidate();
         this.repaint();
+    }
+
+    // EFFECTS: prints all the events stored in the log to the console
+    private void printLog() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e);
+        }
     }
 
     // EFFECTS: initialize elements within the frame
@@ -96,7 +119,6 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         displayPanel.setBounds(250, 50, 350, 300);
         displayPanel.setBackground(Color.lightGray);
         displayPanel.setVisible(true);
-
     }
 
     // EFFECTS: initialize the buttons
@@ -144,6 +166,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         displayPanel.add(listScrollPane, BorderLayout.CENTER);
 
     }
+
 
     /**
      * Represents the action to be taken when the user wants a recipe to be added to the cookbook.
@@ -217,7 +240,9 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
             if (response == (JOptionPane.YES_OPTION)) {
 
-                cookbook.getRecipeList().remove(index);
+
+//                cookbook.getRecipeList().remove(index); //built in remove and not cookbook remove
+                cookbook.removeRecipe(cookbook.getRecipeList().get(index));
                 model.removeElementAt(index);
                 refreshModel();
                 JOptionPane.showMessageDialog(null, "The recipe has been removed!");
@@ -348,7 +373,6 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     // EFFECTS: initialize new text fields
     private void ingredientFields() {
         ingredientNameField = new JTextField();
-
         ingredientAmountField = new JTextField();
         ingredientUnitField = new JTextField();
     }
@@ -385,7 +409,6 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     }
 
-
     // EFFECTS: initializes a splash screen that appears while the main application is loading
     private void initSplash() {
         JWindow window = new JWindow();
@@ -412,6 +435,5 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
     }
-
 
 }
