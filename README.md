@@ -40,23 +40,30 @@ decision to reference the package structure from the FitLifeGym starter file to 
 recipe components their own classes.
 
 ### Phase 4 Task 2
-Mon Mar 28 23:19:12 PDT 2022
-Toast was removed from the Cookbook.
+Wed Mar 30 20:41:46 PDT 2022
+Toast was added to the Cookbook.
 
-Mon Mar 28 23:19:15 PDT 2022
-Oatmeal was removed from the Cookbook.
+Wed Mar 30 20:42:04 PDT 2022
+Oatmeal was added to the Cookbook.
 
-Mon Mar 28 23:19:41 PDT 2022
+Wed Mar 30 20:42:15 PDT 2022
 Dumpling was added to the Cookbook.
 
-Mon Mar 28 23:19:45 PDT 2022
+Wed Mar 30 20:42:18 PDT 2022
+Toast was removed from the Cookbook.
+
+Wed Mar 30 20:42:22 PDT 2022
+Oatmeal was removed from the Cookbook.
+
+Wed Mar 30 20:42:36 PDT 2022
+Shrimp Fried Rice was added to the Cookbook.
+
+Wed Mar 30 20:42:39 PDT 2022
 Shrimp Fried Rice was removed from the Cookbook.
 
-Mon Mar 28 23:19:48 PDT 2022
+Wed Mar 30 20:42:42 PDT 2022
 Dumpling was removed from the Cookbook.
 
-Mon Mar 28 23:19:51 PDT 2022
-Shakshuka was removed from the Cookbook.
 
 ###Phase 4 Task 3
 Given more time, I would improve the general structure of my
