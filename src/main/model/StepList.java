@@ -10,12 +10,12 @@ public class StepList implements Writable {
 
     private ArrayList<Step> stepList;
 
-    // EFFECTS: initialize stepList with an empty ArrayList
+    // EFFECTS: initialize stepList
     public StepList() {
         this.stepList = new ArrayList<Step>();
     }
 
-    // REQUIRES: steps should be added in sequentially; step cannot be 0
+    // REQUIRES: steps should be added in sequentiallly
     // MODIFIES: this
     // EFFECTS: add a step to the list
     public void addStep(Step step) {

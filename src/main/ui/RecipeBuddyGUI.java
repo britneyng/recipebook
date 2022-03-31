@@ -50,8 +50,8 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     JTextField ingredientNameField;
     JTextField ingredientAmountField;
     JTextField ingredientUnitField;
-    JTextField stepNum;
-    JTextField stepInstructions;
+    JTextField stepNumField;
+    JTextField stepInstructionsField;
     int createAnotherIng;
     int createAnotherStep;
     IngredientList ingList;
@@ -99,6 +99,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
         for (Event e : EventLog.getInstance()) {
             System.out.println(e);
         }
+        EventLog.getInstance().clear();
     }
 
     // EFFECTS: initialize elements within the frame
@@ -123,31 +124,51 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: initialize the buttons
     public void initButtons() {
+        addRecipeButton();
+        readRecipeButton();
+        initRemoveButton();
+        initSaveButton();
+        initLoadButton();
+    }
+
+    // EFFECTS: initializes the add recipe button
+    private void addRecipeButton() {
         addRecipeButton = new JButton(new AddRecipeAction());
         addRecipeButton.setBounds(BUTTON_X_POS, 50, BUTTON_WIDTH, BUTTON_HEIGHT);
         addRecipeButton.setText("Write a Recipe");
         addRecipeButton.setVisible(true);
+    }
 
+    // EFFECTS: initializes the read recipe button
+    private void readRecipeButton() {
         readRecipeButton = new JButton(new ReadRecipeAction());
         readRecipeButton.setBounds(BUTTON_X_POS, 100, BUTTON_WIDTH, BUTTON_HEIGHT);
         readRecipeButton.setText("Read a Recipe");
         readRecipeButton.setVisible(true);
+    }
 
+    // EFFECTS: initializes the remove recipe button
+    private void initRemoveButton() {
         removeRecipeButton = new JButton(new RemoveRecipeAction());
         removeRecipeButton.setBounds(BUTTON_X_POS, 150, BUTTON_WIDTH, BUTTON_HEIGHT);
         removeRecipeButton.setText("Remove a Recipe");
         removeRecipeButton.setVisible(true);
+    }
 
+    // EFFECTS: initializes the save recipe button
+    private void initSaveButton() {
         saveButton = new JButton(new SaveRecipesAction());
         saveButton.setBounds(BUTTON_X_POS, 200, BUTTON_WIDTH, BUTTON_HEIGHT);
         saveButton.setText("Save Cookbook");
         saveButton.setVisible(true);
+    }
 
+    // EFFECTS: initializes the load recipe button
+    private void initLoadButton() {
         loadButton = new JButton(new LoadRecipesAction());
         loadButton.setBounds(BUTTON_X_POS, 250, BUTTON_WIDTH, BUTTON_HEIGHT);
         loadButton.setText("Load Cookbook");
         loadButton.setVisible(true);
-
     }
 
     // EFFECTS: initialize the JList that displays each recipe of the cookbook
@@ -240,8 +261,6 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
             if (response == (JOptionPane.YES_OPTION)) {
 
-
-//                cookbook.getRecipeList().remove(index); //built in remove and not cookbook remove
                 cookbook.removeRecipe(cookbook.getRecipeList().get(index));
                 model.removeElementAt(index);
                 refreshModel();
@@ -342,7 +361,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
     // created steps when the user has indicated they are done
     private StepList promptUserForSteps() {
         stepFields();
-        Object[] stepInputs = {"Step Number", stepNum, "Step Instruction", stepInstructions,};
+        Object[] stepInputs = {"Step Number", stepNumField, "Step Instruction", stepInstructionsField,};
         do {
             setEmptyStepFields();
             createAnotherStep = JOptionPane.showConfirmDialog(null, stepInputs,
@@ -358,7 +377,7 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
                 }
 
             } else {
-                stepList.addStep(new Step(parseInt(stepNum.getText()), stepInstructions.getText()));
+                stepList.addStep(new Step(parseInt(stepNumField.getText()), stepInstructionsField.getText()));
             }
         } while (createAnotherStep == JOptionPane.OK_OPTION); // STEP PANE OK
         return stepList;
@@ -386,8 +405,8 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: set Step text fields to empty
     private void setEmptyStepFields() {
-        stepNum.setText("");
-        stepInstructions.setText("");
+        stepNumField.setText("");
+        stepInstructionsField.setText("");
     }
 
     // EFFECTS: check if any of the fields have been left blank and return true if so
@@ -399,13 +418,13 @@ public class RecipeBuddyGUI extends JFrame implements ListSelectionListener {
 
     // EFFECTS: check if any step field is left blank and return true if so
     private Boolean checkEmptyStepFields() {
-        return stepNum.equals("") || (stepInstructions.equals(""));
+        return stepNumField.equals("") || (stepInstructionsField.equals(""));
     }
 
     // EFFECTS: initializes the Step text fields
     private void stepFields() {
-        stepNum = new JTextField("");
-        stepInstructions = new JTextField("");
+        stepNumField = new JTextField("");
+        stepInstructionsField = new JTextField("");
 
     }
 

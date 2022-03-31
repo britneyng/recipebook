@@ -48,7 +48,6 @@ public class IngredientList implements Writable {
         return result;
     }
 
-
     // primarily used as a tester method, may use later for recipe suggestions
     // EFFECTS: returns true if the ingredientList contains a given ingredient, false otherwise
     public Boolean hasIngredient(Ingredient ingredient) {

@@ -1,12 +1,12 @@
 {"recipes": [{
-    "name": "Toast",
+    "name": "Egg",
     "ingredients": {"ingredient list": [{
         "ingredient amount": 1,
-        "ingredient unit": "Slice",
-        "ingredient name": "Bread"
+        "ingredient unit": "whole",
+        "ingredient name": "Egg"
     }]},
     "steps": {"step list": [{
-        "instructions": "Toast the bread",
+        "instructions": "Add the egg",
         "step number": 1
     }]}
 }]}

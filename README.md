@@ -1,13 +1,13 @@
 # Recipe Buddy App 
 
-### What will this application do?
+## What will this application do?
 
 This application will help organize and store an ever-growing 
 list of recipes in a collection. The user will be able to add/view
 each individual recipe with ingredients, and instructions that are easy to follow.
 As well, it will provide suggestions for possible recipes that can be made with given ingredients.
 
-### Who is it for?
+## Who is it for?
 
 This recipe manager application will be helpful for people with kitchen skills of all
 levels who are looking for a way to organize their favorite recipes. It will
@@ -15,7 +15,7 @@ also help with planning meals as the application will also be able to
 suggest recipes with ingredients on hand.
 
 
-### Why a Recipe Manager?
+## Why a Recipe Manager?
 
 I chose to create a Recipe Manager because cooking is a hobby of mine that I enjoy.
 However, I often ran into the problem of not knowing what to cook
@@ -32,14 +32,14 @@ is helpful because it stores all possible recipes in a convenient list for the u
 - As a user, I want to be able to load and view a list of previously saved recipes.
 
 
-### References/Process
+## References/Process
  
 Initially, my classes were structured such that Recipe took in Lists of 
 Strings to handle the ingredient/instruction component. I later made the design
 decision to reference the package structure from the FitLifeGym starter file to give the
 recipe components their own classes.
 
-### Phase 4 Part 2
+### Phase 4 Task 2
 Mon Mar 28 23:19:12 PDT 2022
 Toast was removed from the Cookbook.
 
@@ -58,3 +58,10 @@ Dumpling was removed from the Cookbook.
 Mon Mar 28 23:19:51 PDT 2022
 Shakshuka was removed from the Cookbook.
 
+###Phase 4 Task 3
+Given more time, I would improve the general structure of my
+program by implementing more abstraction to reduce duplication. While all the classes are fairly cohesive,
+I could use an abstract class or interface for the IngredientList/StepList classes to accomplish this.
+
+###UML Class Design Diagram Representation
+![uml class design diagram](./images/diagram.png)
