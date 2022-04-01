@@ -65,7 +65,8 @@ Wed Mar 30 20:42:42 PDT 2022
 Dumpling was removed from the Cookbook.
 
 
-###Phase 4 Task 3
+### Phase 4 Task 3
 Given more time, I would improve the general structure of my
-program by implementing more abstraction to reduce duplication between certain methods. While all the classes are fairly cohesive,
-I could use an abstract class or interface for the IngredientList/StepList classes to accomplish this.
+program by abstracting more between classes that are similar (i.e. IngredientList/StepList) to reduce duplication 
+between certain methods. While I believe that the classes themselves are fairly cohesive and that there is little coupling
+overall, I could certainly benefit from using an abstract class or interface for the IngredientList/StepList classes to accomplish this.
